@@ -3,3 +3,6 @@ uvicorn
 pytest
 scikit-learn
 httpx
+pandas
+numpy
+beautifulsoup4
