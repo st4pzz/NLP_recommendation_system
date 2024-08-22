@@ -4,7 +4,8 @@ import uvicorn
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
-from scripts import get_clean_dataset,get_clean_query
+from scripts.get_data import get_clean_dataset,get_clean_query
+from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
@@ -31,8 +32,8 @@ def query_route(query: str = Query(..., description="Search query")):
         dici['relevance'] = R[i] 
         lista.append(dici)
 
-
-    return {"results": lista, "message": "OK"}
+    content = {"results": lista, "message": "OK"}
+    return JSONResponse(content=content, status_code=200)
 
 def run():
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
