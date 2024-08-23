@@ -1,11 +1,12 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Response
 import os
 import uvicorn
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 from scripts.get_data import get_clean_dataset,get_clean_query
-from fastapi.responses import JSONResponse
+
+import json
 
 app = FastAPI()
 
@@ -32,8 +33,11 @@ def query_route(query: str = Query(..., description="Search query")):
         dici['relevance'] = R[i] 
         lista.append(dici)
 
-    content = {"results": lista, "message": "OK"}
-    return JSONResponse(content=content, status_code=200)
+    content = {"results": lista,
+            "message": "OK"}
+    
+    pretty_data = json.dumps(content, indent=4)
+    return Response(content=pretty_data, media_type="application/json")
 
 def run():
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
