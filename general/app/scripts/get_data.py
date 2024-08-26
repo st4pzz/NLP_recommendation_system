@@ -10,7 +10,7 @@ def remove_stop_words(text):
 
 def get_clean_dataset():
     
-    data = pd.read_csv("./dataset/scraped_lyrics_backup.csv")
+    data = pd.read_csv("./dataset/scraped_lyrics.csv")
     data = data.drop_duplicates(subset="Lyrics", keep="first")
     data['Lyrics'] = data['Lyrics'].str.replace(r'[\r\n]+', ' ', regex=True).str.lower()
     data["Lyrics"] = data['Lyrics'].apply(lambda x: remove_stop_words(x))

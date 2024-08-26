@@ -7,4 +7,3 @@ pandas
 numpy
 beautifulsoup4
 requests
-json
