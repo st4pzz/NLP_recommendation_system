@@ -48,8 +48,8 @@ Install the necessary dependencies:
 To run the project using Docker, follow these commands:
 
 
-```docker build -t general .```
-```docker run -d -p 6969:8888 general```
+```docker build -t lyricsrecommendation .```
+```docker run -d -p 6969:6969 lyricsrecommendation```
 This will create and start a Docker container with the recommendation system, which will be available on port 6969.
 
 ## How It Works

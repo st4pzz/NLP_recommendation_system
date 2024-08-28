@@ -4,7 +4,7 @@ import uvicorn
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
-from scripts.get_data import get_clean_dataset,get_clean_query
+from app.scripts.get_data import get_clean_dataset, get_clean_query
 
 import json
 
