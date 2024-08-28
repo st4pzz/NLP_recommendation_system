@@ -1,17 +1,15 @@
-Music Recommendation System by Lyrics
-Overview
+# Music Recommendation System by Lyrics
+
+## Overview
 This project is a music recommendation system based on lyrics. The core idea is to use the lyrical content of songs to recommend tracks that are similar in terms of keywords. This type of recommendation can be particularly useful for users who want to discover new music based on lyrical content.
 
-Why This Topic is Relevant
+## Why This Topic is Relevant
 Lyrics-based recommendations offer a unique and distinctive approach compared to traditional systems, which typically rely on listening data, such as genre preferences or artist popularity. A song's lyrics are an artistic expression that can convey emotions, tell stories, and capture the essence of a culture. Exploring recommendations based on lyrical content allows users to discover songs that have emotional impact and resonate with their feelings or personal experiences. Additionally, this type of system can help highlight lesser-known songs that may not be popular but have powerful and meaningful lyrics.
 
-
-Based on the provided script, here is an improved description of the web scraping process:
-
-How the Web Scraping Was Done
+## How the Web Scraping Was Done
 The web scraping for this project was implemented using Python, utilizing the requests library to make HTTP requests and BeautifulSoup to parse HTML content. The primary goal was to collect a comprehensive dataset of song lyrics from various artists on the Lyrics.com website, ensuring a broad coverage of different genres and musical styles. The script was carefully designed to scrape data efficiently while adhering to the website's structure and minimizing the load on its servers.
 
-Scraping Process Overview
+## Scraping Process Overview
 Initialization: The script begins by defining necessary headers to simulate a browser request and avoid potential blocks by the website. A list of uppercase letters from 'A' to 'Z' is used to navigate through different sections of artists on Lyrics.com, and a dictionary tracks the number of tracks scraped per letter.
 
 Artist Collection: For each letter, the script navigates to the corresponding page that lists all artists whose names start with that letter. The page is fetched using a GET request, and the content is parsed with BeautifulSoup. The script checks if the page contains any artist entries; if not, it moves on to the next letter.
@@ -31,34 +29,30 @@ Maximum Songs per Artist: The script limits the number of songs scraped per arti
 
 Maximum Tracks per Letter: To ensure a balanced dataset, the script also limits the total number of tracks scraped per letter to 1,000. This avoids an overrepresentation of artists from a particular letter and promotes a more comprehensive coverage of the musical landscape.
 
-How to Install
+## How to Install
 To install and run the project, follow the steps below:
 
 Clone this repository:
 
-bash
-Copy code
-git clone https://github.com/st4pzz/NLP_recommendation_system.git
+
+```git clone https://github.com/st4pzz/NLP_recommendation_system.git```
+
 Navigate to the project directory:
 
-bash
-Copy code
-cd LyricsRecommendation
+```cd LyricsRecommendation```
 Install the necessary dependencies:
 
-bash
-Copy code
-pip install -r requirements.txt
-How to Run
+```pip install -r requirements.txt```
+
+## How to Run
 To run the project using Docker, follow these commands:
 
-bash
-Copy code
-docker build -t general .
-docker run -d -p 6969:8888 general
+
+```docker build -t general .```
+```docker run -d -p 6969:8888 general```
 This will create and start a Docker container with the recommendation system, which will be available on port 6969.
 
-How It Works
+## How It Works
 The music recommendation system operates by analyzing the lyrical content of songs and identifying those that are most similar to a user-provided query. The system uses a combination of natural language processing (NLP) and machine learning techniques to achieve this. Here's a breakdown of how the system works:
 
 1. User Input and Query Cleaning
@@ -108,10 +102,10 @@ These results are then formatted into a JSON response, which is returned to the 
 ```
  
 
-Where I Got Data From
+## Where I Got Data From
 The data was obtained through web scraping from the site Lyrics.com. This site was chosen for its comprehensiveness and easy access to a large number of song lyrics from different genres and artists.
 
-How to Test
+## How to Test
 To test the system, you can use the URLs provided for each lyric and run queries to check if the system is returning appropriate recommendations. Below are some example URLs used for testing:
 
 https://www.lyrics.com/lyric/1234567 - Pop song test
@@ -119,5 +113,5 @@ https://www.lyrics.com/lyric/2345678 - Rock song test
 https://www.lyrics.com/lyric/3456789 - Hip-hop song test
 You can adapt these URLs and lyrics as needed for your own testing and development.
 
-Authors
-Sergio Eduardo Ramella Junior
+## Authors 
+- Sergio Eduardo Ramella Junior
