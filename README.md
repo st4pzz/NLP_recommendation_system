@@ -10,24 +10,24 @@ Lyrics-based recommendations offer a unique and distinctive approach compared to
 The web scraping for this project was implemented using Python, utilizing the requests library to make HTTP requests and BeautifulSoup to parse HTML content. The primary goal was to collect a comprehensive dataset of song lyrics from various artists on the Lyrics.com website, ensuring a broad coverage of different genres and musical styles. The script was carefully designed to scrape data efficiently while adhering to the website's structure and minimizing the load on its servers.
 
 ## Scraping Process Overview
-Initialization: The script begins by defining necessary headers to simulate a browser request and avoid potential blocks by the website. A list of uppercase letters from 'A' to 'Z' is used to navigate through different sections of artists on Lyrics.com, and a dictionary tracks the number of tracks scraped per letter.
+- Initialization: The script begins by defining necessary headers to simulate a browser request and avoid potential blocks by the website. A list of uppercase letters from 'A' to 'Z' is used to navigate through different sections of artists on Lyrics.com, and a dictionary tracks the number of tracks scraped per letter.
 
-Artist Collection: For each letter, the script navigates to the corresponding page that lists all artists whose names start with that letter. The page is fetched using a GET request, and the content is parsed with BeautifulSoup. The script checks if the page contains any artist entries; if not, it moves on to the next letter.
+- Artist Collection: For each letter, the script navigates to the corresponding page that lists all artists whose names start with that letter. The page is fetched using a GET request, and the content is parsed with BeautifulSoup. The script checks if the page contains any artist entries; if not, it moves on to the next letter.
 
-Filtering Artists: The script identifies artists with a substantial number of songs by checking the second <td> element in each row of the table containing the artist list. Only artists with more than 100 songs are selected for further scraping. This filtering ensures that only artists with a rich catalog are considered, improving the quality and quantity of the collected data.
+- Filtering Artists: The script identifies artists with a substantial number of songs by checking the second ```<td>``` element in each row of the table containing the artist list. Only artists with more than 100 songs are selected for further scraping. This filtering ensures that only artists with a rich catalog are considered, improving the quality and quantity of the collected data.
 
-Album Collection: For each selected artist, the script accesses their dedicated page to retrieve a list of albums. The artist's page is parsed to find all album entries. For each album, the script navigates to the album's page to extract the list of songs.
+- Album Collection: For each selected artist, the script accesses their dedicated page to retrieve a list of albums. The artist's page is parsed to find all album entries. For each album, the script navigates to the album's page to extract the list of songs.
 
-Lyrics Collection: On the album page, the script iterates through the songs, extracting the song names and their URLs. For each song, it navigates to the song's page to fetch the lyrics. The lyrics are located within a <pre> tag. The script processes the content to remove unwanted elements, such as links or additional formatting, ensuring clean text extraction.
+- Lyrics Collection: On the album page, the script iterates through the songs, extracting the song names and their URLs. For each song, it navigates to the song's page to fetch the lyrics. The lyrics are located within a ```<pre>``` tag. The script processes the content to remove unwanted elements, such as links or additional formatting, ensuring clean text extraction.
 
-Data Storage: The extracted lyrics, along with the song names, are stored in a Python dictionary and appended to a list. This list is subsequently converted into a Pandas DataFrame and saved as a CSV file (scraped_lyrics.csv). This structured storage format facilitates further analysis and use in the recommendation system.
+- Data Storage: The extracted lyrics, along with the song names, are stored in a Python dictionary and appended to a list. This list is subsequently converted into a Pandas DataFrame and saved as a CSV file (scraped_lyrics.csv). This structured storage format facilitates further analysis and use in the recommendation system.
 
-Rate Limiting and Error Handling: To comply with web scraping best practices, the script includes a delay (time.sleep(2)) between requests to reduce server load and avoid being blocked. Additionally, comprehensive error handling is implemented to manage potential issues during scraping, such as network errors or unexpected HTML structures.
+- Rate Limiting and Error Handling: To comply with web scraping best practices, the script includes a delay (time.sleep(2)) between requests to reduce server load and avoid being blocked. Additionally, comprehensive error handling is implemented to manage potential issues during scraping, such as network errors or unexpected HTML structures.
 
-Scraping Constraints
+- Scraping Constraints
 Maximum Songs per Artist: The script limits the number of songs scraped per artist to a maximum of 50. This constraint helps to diversify the dataset by including more artists rather than focusing heavily on a few with extensive discographies.
 
-Maximum Tracks per Letter: To ensure a balanced dataset, the script also limits the total number of tracks scraped per letter to 1,000. This avoids an overrepresentation of artists from a particular letter and promotes a more comprehensive coverage of the musical landscape.
+- Maximum Tracks per Letter: To ensure a balanced dataset, the script also limits the total number of tracks scraped per letter to 1,000. This avoids an overrepresentation of artists from a particular letter and promotes a more comprehensive coverage of the musical landscape.
 
 ## How to Install
 To install and run the project, follow the steps below:
