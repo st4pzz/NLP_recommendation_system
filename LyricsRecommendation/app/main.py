@@ -12,7 +12,7 @@ import json
 app = FastAPI()
 
 DATA = get_clean_dataset()  
-model_path = os.path.join(os.path.dirname(__file__), '..', 'model', 'tfidf_model.pkl')
+model_path = os.path.join(os.path.dirname(__file__), 'model', 'tfidf_model.pkl')
 vectorizer, X = joblib.load(model_path)
 
 @app.get("/hello")
