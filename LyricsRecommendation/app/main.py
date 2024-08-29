@@ -10,6 +10,8 @@ import json
 
 app = FastAPI()
 
+
+DATA = get_clean_dataset()
 @app.get("/hello")
 def read_hello():
     return {"message": "hello world"}
@@ -17,10 +19,8 @@ def read_hello():
 @app.get("/query")
 def query_route(query: str = Query(..., description="Search query")):
     query = get_clean_query(query)
-    data = get_clean_dataset()
-
     vectorizer = TfidfVectorizer()
-    X = vectorizer.fit_transform(data["Lyrics"])
+    X = vectorizer.fit_transform(DATA["Lyrics"])
     Q = vectorizer.transform([query])
     R = X @ Q.T
     R = R.toarray().flatten()
@@ -28,11 +28,11 @@ def query_route(query: str = Query(..., description="Search query")):
     lista = []
     for i in idx:
         dici = {}
-        dici['title'] = data.iloc[i]["Song Name"]
-        if len(data.iloc[i]["Lyrics"].split()) >= 500:
-            dici['content'] = " ".join(data.iloc[i]["Lyrics"].split()[:500]) + "..."
+        dici['title'] = DATA.iloc[i]["Song Name"]
+        if len(DATA.iloc[i]["Lyrics"].split()) >= 500:
+            dici['content'] = " ".join(DATA.iloc[i]["Lyrics"].split()[:500]) + "..."
         else:
-            dici['content'] = data.iloc[i]["Lyrics"]
+            dici['content'] = DATA.iloc[i]["Lyrics"]
         dici['relevance'] = R[i] 
         lista.append(dici)
 
