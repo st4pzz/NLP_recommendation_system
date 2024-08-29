@@ -4,12 +4,11 @@ import uvicorn
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
-from app.scripts.get_data import get_clean_dataset, get_clean_query
+from app.scripts.get_data import get_clean_dataset, get_clean_query, remove_stop_words
 
 import json
 
 app = FastAPI()
-
 
 DATA = get_clean_dataset()
 @app.get("/hello")
@@ -19,8 +18,9 @@ def read_hello():
 @app.get("/query")
 def query_route(query: str = Query(..., description="Search query")):
     query = get_clean_query(query)
+    data_clean = DATA['Lyrics'].apply(lambda x: remove_stop_words(x))
     vectorizer = TfidfVectorizer()
-    X = vectorizer.fit_transform(DATA["Lyrics"])
+    X = vectorizer.fit_transform(data_clean["Lyrics"])
     Q = vectorizer.transform([query])
     R = X @ Q.T
     R = R.toarray().flatten()
@@ -29,13 +29,13 @@ def query_route(query: str = Query(..., description="Search query")):
     for i in idx:
         if R[i] > 0.0:        
             dici = {}
+            dici['title'] = DATA.iloc[i]["Song Name"]
             if len(DATA.iloc[i]["Lyrics"].split()) >= 500:
                 dici['content'] = " ".join(DATA.iloc[i]["Lyrics"].split()[:500]) + "..."
             else:
                 dici['content'] = DATA.iloc[i]["Lyrics"]
-            dici['title'] = DATA.iloc[i]["Song Name"]
             dici['relevance'] = R[i] 
-        lista.append(dici)
+            lista.append(dici)
 
     content = {"results": lista,
             "message": "OK"}
