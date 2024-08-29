@@ -27,8 +27,8 @@ def query_route(query: str = Query(..., description="Search query")):
     idx = R.argsort()[-10:][::-1]
     lista = []
     for i in idx:
-        dici = {}
         if R[i] > 0.0:        
+            dici = {}
             if len(DATA.iloc[i]["Lyrics"].split()) >= 500:
                 dici['content'] = " ".join(DATA.iloc[i]["Lyrics"].split()[:500]) + "..."
             else:
