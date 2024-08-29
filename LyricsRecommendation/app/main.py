@@ -28,12 +28,12 @@ def query_route(query: str = Query(..., description="Search query")):
     lista = []
     for i in idx:
         dici = {}
-        dici['title'] = DATA.iloc[i]["Song Name"]
-        if R[i] > 0:        
+        if R[i] > 0.0:        
             if len(DATA.iloc[i]["Lyrics"].split()) >= 500:
                 dici['content'] = " ".join(DATA.iloc[i]["Lyrics"].split()[:500]) + "..."
             else:
                 dici['content'] = DATA.iloc[i]["Lyrics"]
+            dici['title'] = DATA.iloc[i]["Song Name"]
             dici['relevance'] = R[i] 
         lista.append(dici)
 
