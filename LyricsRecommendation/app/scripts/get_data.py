@@ -25,10 +25,10 @@ def get_clean_query(query):
 
 
 
-DATA = get_clean_dataset()
-data_clean = DATA.copy()
-data_clean["Lyrics"] = data_clean["Lyrics"].apply(lambda x: remove_stop_words(x))
-vectorizer = TfidfVectorizer()
-X = vectorizer.fit_transform(data_clean["Lyrics"])
-model_path = os.path.join(os.path.dirname(__file__), '..', 'model', 'tfidf_model.pkl')
-joblib.dump((vectorizer, X), model_path)
+# DATA = get_clean_dataset()
+# data_clean = DATA.copy()
+# data_clean["Lyrics"] = data_clean["Lyrics"].apply(lambda x: remove_stop_words(x))
+# vectorizer = TfidfVectorizer()
+# X = vectorizer.fit_transform(data_clean["Lyrics"])
+# model_path = os.path.join(os.path.dirname(__file__), '..', 'model', 'tfidf_model.pkl')
+# joblib.dump((vectorizer, X), model_path)

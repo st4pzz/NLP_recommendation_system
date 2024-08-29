@@ -11,6 +11,10 @@ import json
 
 app = FastAPI()
 
+DATA = get_clean_dataset()  
+model_path = os.path.join(os.path.dirname(__file__), '..', 'model', 'tfidf_model.pkl')
+vectorizer, X = joblib.load(model_path)
+
 @app.get("/hello")
 def read_hello():
     return {"message": "hello world"}
@@ -18,8 +22,6 @@ def read_hello():
 @app.get("/query")
 def query_route(query: str = Query(..., description="Search query")):
     query = get_clean_query(query)
-    model_path = os.path.join(os.path.dirname(__file__), '..', 'model', 'tfidf_model.pkl')
-    vectorizer, X = joblib.load(model_path)
     Q = vectorizer.transform([query])
     R = X @ Q.T
     R = R.toarray().flatten()
