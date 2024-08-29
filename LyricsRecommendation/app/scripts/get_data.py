@@ -1,5 +1,8 @@
 import pandas as pd
 import os
+from sklearn.feature_extraction.text import TfidfVectorizer
+import joblib
+
 
 def remove_stop_words(text):
     file_path = os.path.join(os.path.dirname(__file__), "stop_words.txt")
@@ -21,3 +24,11 @@ def get_clean_query(query):
     return query
 
 
+
+DATA = get_clean_dataset()
+data_clean = DATA.copy()
+data_clean["Lyrics"] = data_clean["Lyrics"].apply(lambda x: remove_stop_words(x))
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(data_clean["Lyrics"])
+model_path = os.path.join(os.path.dirname(__file__), '..', 'model', 'tfidf_model.pkl')
+joblib.dump((vectorizer, X), model_path)

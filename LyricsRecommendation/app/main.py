@@ -4,14 +4,13 @@ import uvicorn
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
-from app.scripts.get_data import get_clean_dataset, get_clean_query, remove_stop_words
+from scripts.get_data import get_clean_dataset, get_clean_query, remove_stop_words
 import joblib
 
 import json
 
 app = FastAPI()
 
-DATA = get_clean_dataset()
 @app.get("/hello")
 def read_hello():
     return {"message": "hello world"}
@@ -19,12 +18,8 @@ def read_hello():
 @app.get("/query")
 def query_route(query: str = Query(..., description="Search query")):
     query = get_clean_query(query)
-    data_clean = DATA
-    data_clean["Lyrics"] = data_clean["Lyrics"].apply(lambda x: remove_stop_words(x))
-    vectorizer = TfidfVectorizer()
-    X = vectorizer.fit_transform(data_clean["Lyrics"])
-    joblib.dump((vectorizer, X), "/absolute/path/to/tfidf_model.pkl")
-    vectorizer, X = joblib.load("/absolute/path/to/tfidf_model.pkl")
+    model_path = os.path.join(os.path.dirname(__file__), '..', 'model', 'tfidf_model.pkl')
+    vectorizer, X = joblib.load(model_path)
     Q = vectorizer.transform([query])
     R = X @ Q.T
     R = R.toarray().flatten()
