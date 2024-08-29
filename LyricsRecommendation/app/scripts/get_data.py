@@ -13,7 +13,6 @@ def get_clean_dataset():
     data = pd.read_csv(dataset_path)
     data = data.drop_duplicates(subset="Lyrics", keep="first")
     data['Lyrics'] = data['Lyrics'].str.replace(r'[\r\n]+', ' ', regex=True).str.lower()
-    data["Lyrics"] = data['Lyrics'].apply(lambda x: remove_stop_words(x))
     return data
 
 def get_clean_query(query):

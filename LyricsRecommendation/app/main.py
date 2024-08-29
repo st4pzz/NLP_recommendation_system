@@ -18,7 +18,8 @@ def read_hello():
 @app.get("/query")
 def query_route(query: str = Query(..., description="Search query")):
     query = get_clean_query(query)
-    data_clean = DATA['Lyrics'].apply(lambda x: remove_stop_words(x))
+    data_clean = DATA
+    data_clean["Lyrics"] = data_clean["Lyrics"].apply(lambda x: remove_stop_words(x))
     vectorizer = TfidfVectorizer()
     X = vectorizer.fit_transform(data_clean["Lyrics"])
     Q = vectorizer.transform([query])
