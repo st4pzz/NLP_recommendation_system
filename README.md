@@ -103,15 +103,15 @@ These results are then formatted into a JSON response, which is returned to the 
  
 
 ## Where I Got Data From
-The data was obtained through web scraping from the site Lyrics.com. This site was chosen for its comprehensiveness and easy access to a large number of song lyrics from different genres and artists.
+The data was obtained through web scraping from the site ```wwww.lyrics.com``` This site was chosen for its comprehensiveness and easy access to a large number of song lyrics from different genres and artists.
 
 ## How to Test
 To test the system, you can use the URLs provided for each lyric and run queries to check if the system is returning appropriate recommendations. Below are some example URLs used for testing:
 
-https://www.lyrics.com/lyric/1234567 - Pop song test
-https://www.lyrics.com/lyric/2345678 - Rock song test
-https://www.lyrics.com/lyric/3456789 - Hip-hop song test
-You can adapt these URLs and lyrics as needed for your own testing and development.
+
+- [A test that yields 10 results](http://10.103.0.28:6969/query?query=life%20is%20beautiful)
+- [A test that yields more than 1, but less than 10 results because there are not enough relevant documents in the database](http://10.103.0.28:6969/query?query=capitalism)
+- [A test that yields something non-obvious](http://10.103.0.28:6969/query?query=songs%20about%20happiness) . ```Why this result is non-obvious ? Because While the song explicitly mentions "happiness" several times, the context in which the word is used is more complex and introspective. The lyrics reflect a struggle with pain, emotional challenges, and a contrast between the difficulty of finding happiness and the desire to share it if found. This creates a juxtaposition where the song isn't directly about pure, straightforward happiness but rather the elusive and often difficult nature of achieving it.```
 
 ## Authors 
 - Sergio Eduardo Ramella Junior
